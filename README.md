@@ -8,13 +8,12 @@
 
 ## 1. 專案簡介 (Overview)
 
-本專案目標是從「收貨單影像 + 貨品實拍照片」自動產生可用於驗收的結構化資訊，並將結果與專案採購清單進行比對，協助人員快速發現以下問題：
+從「收貨單影像 + 貨品實拍照片」產生可用於驗收的結構化資訊，並將結果與專案採購清單進行比對，協助人員快速發現以下問題：
 
 - 收貨單上的品名、數量、序號與實際貨物不一致  
-- 收貨單上「有列但沒收到」或「收到但沒列出」的項目  
-- 單據上資訊模糊/手寫/拍攝角度不佳時，提供 VLM 輔助判讀
+- 收貨單上「有列但沒收到」或「收到但沒列出」的項目
 
-*The system transforms delivery note images and product photos into structured data, then compares them against purchase records to highlight mismatches and potential risks.*
+單據上資訊模糊/手寫/拍攝角度不佳時，提供 VLM 輔助判讀
 
 ---
 
@@ -30,7 +29,6 @@
   - 序號 / 批號（serial / lot number）  
   - 日期（date / delivery date）  
 - ✅ 轉為結構化 JSON / 表格格式，方便後續比對。  
-  *Extract item name, quantity, serial/lot number and date from delivery note images into structured JSON form.*
 
 ### 2.2 VLM 圖文交叉驗證 (Cross-check with VLM: Image + Text)
 
@@ -65,14 +63,14 @@
 ```text
 [收貨單影像]       [貨品實拍影像]
       │                │
-      │                ├────────────┐
-      │                             │
-[OCR 模組]                         │
+      │                ├───────────┐
+      │                            │
+[OCR 模組]                          
 (文字偵測 + 辨識)                   │
-      │                             │
-      ↓                             │
+      │                            │
+      ↓                            │
 [結構化欄位抽取]                    │
-(item_name, quantity, SN, date, ...)│
+(item_name, quantity, SN, date, ...│
       │                             │
       ├──────────────┐              │
       │              │              │
