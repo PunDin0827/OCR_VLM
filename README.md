@@ -1,6 +1,6 @@
 # Gemma3 VLM for OCR + Visual Inspection（看圖驗貨系統）
 
-> 使用 **Gemma3 Vision-Language Model (VLM)** 結合 **OCR + 圖片輸入**，協助收貨人員「看圖驗貨」，自動比對收貨單與實際貨品狀態。  
+使用 **Gemma3 Vision-Language Model (VLM)** 結合 **OCR + 圖片輸入**，協助收貨人員「看圖驗貨」，自動比對收貨單與實際貨品狀態。  
 
 > 目前仍在開發中，API 介面與模組設計可能會調整。  
 
