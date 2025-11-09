@@ -1,4 +1,4 @@
-# Gemma3 VLM for OCR + Visual Inspection（看圖驗貨系統）
+# Gemma3 + Paddle OCR：貨物驗收核對系統
 
 使用 **Gemma3 Vision-Language Model (VLM)** 結合 **OCR + 圖片輸入**，協助收貨人員「看圖驗貨」，自動比對收貨單與實際貨品狀態。  
 
