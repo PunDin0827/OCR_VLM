@@ -11,28 +11,28 @@
   把「收貨單影像 → OCR 輸出 → 結構化 JSON → 料表比對」做成一條自動化處理流程，減少人工對帳、抄寫與比對錯誤。
 
 - 典型使用情境：  
-  - 事先用 OCR 系統（例如 PaddleOCR）對收貨單做偵測與辨識，產出：
-    - `cell_box.json`：每個欄位／儲存格的位置資訊（版面結構, layout）。
-    - `html.json`：對應的文字內容（text content）。
+  - 事先用 OCR 對收貨單做偵測與辨識，產出：
+    - `cell_box.json`：每個欄位／儲存格的位置資訊。
+    - `html.json`：對應的文字內容。
   - 將上述 JSON 與收貨單影像 `IMG.jpg` 丟給 Gemma3 VLM，  
     自動輸出包含 **PO 單號、品名、規格、數量、價錢** 的 JSON。  
   - 再把這些品項與內部的模擬資料表 `db_table` 做模糊比對，找出最可能對應的料號。
 
 - 執行環境：  
   - 使用 `llama.cpp` 載入 **本地 Gemma3 VLM (gguf)** 與多模態投影 `mmproj`，  
-  - 完全可以在 **無外網 (offline / on-prem)** 的環境中執行。
+  - 可在 **無外網** 的環境中執行。
 
 ---
 
 ## 2. 功能特色
 
-- **VLM + OCR 整合 (VLM + OCR integration)**  
+- **VLM + OCR 整合**  
   - OCR 先負責文字偵測與辨識，將版面拆成：
     - `cell_box.json`：欄位座標與表格結構。
     - `html.json`：欄位內文字。  
   - Gemma3 VLM 同時接收：
-    - 收貨單影像 `IMG.jpg`（image input）  
-    - OCR 的 JSON（text + layout hint）  
+    - 收貨單影像 `IMG.jpg` 
+    - OCR 的 JSON
   - 讓模型在「看圖 + 讀 OCR」的情況下，做出更穩定的欄位對齊與欄位填寫。
 
 - **JSON-only 結構化輸出 (structured JSON output only)**  
@@ -78,18 +78,18 @@
 ```text
 [收貨單影像 IMG.jpg]
           │
-          │ (OCR engine, e.g., PaddleOCR)
+          │ (PaddleOCR)
           ▼
   +------------------+
   |   OCR 輸出 JSON  |
-  |  cell_box.json   |  ← 儲存格座標、表格結構 (layout)
-  |  html.json       |  ← 對應文字內容 (text)
+  |  cell_box.json   |  ← 儲存格座標、表格結構
+  |  html.json       |  ← 對應文字內容 
   +------------------+
           │
-          │  (image + OCR JSON as input)
+          │  (input image + OCR JSON)
           ▼
 +------------------------------------------+
-| Gemma3 VLM (llama.cpp + Llava15 handler)|
+| - Gemma3 VLM                               |
 | - multi-modal reasoning                  |
 | - JSON-only prompt                       |
 +------------------------------------------+
@@ -105,6 +105,6 @@
           │  比對 db_table (模擬採購料表)
           ▼
 [輸出結果]
-  - 每一筆品項的最佳匹配料號 (best match)
-  - 相似度分數 (similarity score)
+  - 每一筆品項的最佳匹配料號
+  - 相似度分數
   - 可用於後續人工確認或自動對帳
