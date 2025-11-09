@@ -35,7 +35,7 @@
     - OCR 的 JSON
   - 讓模型在「看圖 + 讀 OCR」的情況下，做出更穩定的欄位對齊與欄位填寫。
 
-- **JSON-only 結構化輸出 (structured JSON output only)**  
+- **JSON-only 結構化輸出**  
   - 在 prompt 中強制要求 **僅輸出 JSON，不允許多餘文字、註解或程式碼區塊**：  
     ```jsonc
     {
@@ -53,7 +53,7 @@
   - 推論完成後，會先用 `re.sub` 去掉可能出現的 ```json / ``` 等 markdown fence，  
     再用 `json.loads` 轉成 Python dict，方便後續程式處理。
 
-- **模糊比對 (fuzzy matching) 對應內部料表**  
+- **模糊比對內部採購清單**  
   - 使用 `rapidfuzz` 套件中的 `fuzz.ratio` 來計算：
     - 模型預測的 `品名` vs `db_table` 中的品名  
     - 模型預測的 `規格` vs `db_table` 中的規格  
@@ -100,5 +100,4 @@
 
 ---
 
-## 4. 後續規劃
- 
+
