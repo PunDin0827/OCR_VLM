@@ -141,5 +141,6 @@
 
 ---
 ![PO單號比對1](https://github.com/user-attachments/assets/f006a8a1-f83a-4644-85d8-9527316c8d87)
+![拍照驗貨](https://github.com/user-attachments/assets/01b90bd2-4221-4ba6-adf8-edadda43dbba)
 
 
